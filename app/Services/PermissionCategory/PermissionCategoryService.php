@@ -4,7 +4,8 @@ namespace App\Services\PermissionCategory;
 
 use LaravelEasyRepository\BaseService;
 
-interface PermissionCategoryService extends BaseService{
-
-    // Write something awesome :)
+interface PermissionCategoryService extends BaseService
+{
+  public function getQuery();
+  public function with(array $with = []);
 }
