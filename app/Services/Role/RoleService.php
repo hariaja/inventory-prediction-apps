@@ -10,6 +10,6 @@ interface RoleService extends BaseService
   public function getQuery();
   public function getRoleByName(array $name = []);
   public function getRoleHasPermissions($id);
-  public function handleNewRole(Request $request);
+  public function handleStoreRole(Request $request);
   public function handleUpdateRole(Request $request, int $id);
 }

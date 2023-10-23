@@ -37,15 +37,17 @@ class RoleController extends Controller
    */
   public function create()
   {
-    //
+    $permissions = $this->permissionCategoryService->with(['permissions'])->get();
+    return view('settings.roles.create', compact('permissions'));
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(RoleRequest $request)
   {
-    //
+    $this->roleService->handleStoreRole($request);
+    return redirect(route('roles.index'))->withSuccess(trans('session.create'));
   }
 
   /**

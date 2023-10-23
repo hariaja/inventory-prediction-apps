@@ -27,8 +27,8 @@ class RoleRequest extends FormRequest
 
     return [
       'name' => [
-        'required', 'string', 'max:50', "in:{$roleValidation}",
-        Rule::unique('roles', 'name')->ignore($this->role)
+        'required', 'string', 'max:50',
+        Rule::unique('roles', 'name')->ignore($this->role),
       ],
       'permission' => [
         'nullable',

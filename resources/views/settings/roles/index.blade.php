@@ -19,6 +19,17 @@
   </div>
   <div class="block-content">
 
+    @can('roles.create')
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <a href="{{ route('roles.create') }}" class="btn btn-primary">
+          <i class="fa fa-plus fa-xs me-1"></i>
+          {{ trans('page.roles.create') }}
+        </a>
+      </div>
+    </div>
+    @endcan
+
     <div class="my-3">
       {{ $dataTable->table() }}
     </div>

@@ -22,6 +22,8 @@ class PermissionList
 
       // Halaman Role
       'roles.index',
+      'roles.create',
+      'roles.store',
       'roles.edit',
       'roles.update',
       'roles.destroy',

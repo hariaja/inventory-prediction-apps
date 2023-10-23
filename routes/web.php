@@ -33,7 +33,7 @@ Route::middleware([
   // Settings Page
   Route::prefix('settings')->group(function () {
     // Role management.
-    Route::resource('roles', RoleController::class)->except('show', 'create', 'store');
+    Route::resource('roles', RoleController::class)->except('show');
 
     // User management.
     Route::patch('users/status/{user}', [UserController::class, 'status'])->name('users.status');

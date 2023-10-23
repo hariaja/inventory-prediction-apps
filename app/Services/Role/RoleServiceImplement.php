@@ -61,7 +61,7 @@ class RoleServiceImplement extends Service implements RoleService
     }
   }
 
-  public function handleNewRole($request)
+  public function handleStoreRole($request)
   {
     try {
       DB::beginTransaction();
