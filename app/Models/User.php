@@ -133,4 +133,28 @@ class User extends Authenticatable
       $row->where('name', RoleType::ADMIN->value);
     });
   }
+
+  /**
+   * Define badge type roles.
+   *
+   * @return string
+   */
+  public function getRoleBadge(): string
+  {
+    $roleName = $this->getRoleName();
+
+    switch ($roleName) {
+      case RoleType::ADMIN->value:
+        $badgeClass = 'badge text-success';
+        break;
+      case RoleType::STAFF->value:
+        $badgeClass = 'badge text-info';
+        break;
+      default:
+        $badgeClass = 'badge';
+        break;
+    }
+
+    return "<span class='{$badgeClass}'>{$roleName}</span>";
+  }
 }

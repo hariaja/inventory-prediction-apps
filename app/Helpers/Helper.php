@@ -11,6 +11,7 @@ class Helper
 {
   public const ALL = 'Semua Data';
   public const DEFAULT_PASSWORD = 'password';
+  public const NEW_PASSWORD = 'password@baru123';
 
   /**
    * Check permission to action datatables;
