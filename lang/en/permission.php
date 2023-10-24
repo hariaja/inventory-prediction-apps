@@ -39,4 +39,17 @@ return [
     'delete' => 'Hapus Permanen Bahan yang sudah Terhapus dari penyimpanan',
     'restore' => 'Restore Data Bahan yang ditentukan dari penyimpanan yang sudah dihapus',
   ],
+
+  'products' => [
+    'name' => 'Management Produk',
+    'index' => 'Menampilkan daftar Produk',
+    'create' => 'Tampilkan formulir untuk membuat Produk baru',
+    'store' => 'Simpan Produk yang baru dibuat di penyimpanan',
+    'show' => 'Menampilkan Detail Produk yang ditentukan',
+    'edit' => 'Tampilkan formulir untuk mengedit Produk yang ditentukan',
+    'update' => 'Perbarui Produk yang ditentukan dalam penyimpanan',
+    'destroy' => 'Hapus Produk yang ditentukan dari penyimpanan',
+    'delete' => 'Hapus Permanen Produk yang sudah Terhapus dari penyimpanan',
+    'restore' => 'Restore Data Produk yang ditentukan dari penyimpanan yang sudah dihapus',
+  ],
 ];

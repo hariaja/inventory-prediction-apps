@@ -93,6 +93,12 @@
             @enderror
           </div>
 
+          <div class="mb-1">
+            <button type="reset" class="btn btn-danger w-100">
+              <i class="fa fa-fw fa-eraser me-1"></i>
+              {{ trans('Reset') }}
+            </button>
+          </div>
           <div class="mb-4">
             <button type="submit" class="btn btn-primary w-100" id="submit-button">
               <i class="fa fa-fw fa-circle-check me-1"></i>

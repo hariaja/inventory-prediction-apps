@@ -39,4 +39,13 @@ return [
     'show' => 'Detail Bahan Baku',
     'delete' => 'Hapus Bahan Baku',
   ],
+
+  'products' => [
+    'title' => 'Produk',
+    'index' => 'Daftar Produk',
+    'create' => 'Tambah Produk',
+    'edit' => 'Ubah Produk',
+    'show' => 'Detail Produk',
+    'delete' => 'Hapus Produk',
+  ],
 ];

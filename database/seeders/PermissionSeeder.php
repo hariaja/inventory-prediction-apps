@@ -25,6 +25,7 @@ class PermissionSeeder extends Seeder
       'users' => 1,
       'roles' => 2,
       'materials' => 3,
+      'products' => 4,
     ];
 
     // Masukkan atau simpan ke tabel permissions

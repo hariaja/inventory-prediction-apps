@@ -28,7 +28,7 @@
           <div class="mb-4">
             <label class="form-label" for="name">{{ trans('Nama Bahan') }}</label>
             <span class="text-danger">*</span>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" onkeypress="return hanyaHuruf(event)">
+            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" onkeypress="return hanyaHuruf(event)" placeholder="{{ trans('Masukan Nama Bahan') }}">
             @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -37,7 +37,7 @@
           <div class="mb-4">
             <label class="form-label" for="total">{{ trans('Jumlah') }}</label>
             <span class="text-danger">*</span>
-            <input type="number" min="1" max="100" step="1" name="total" id="total" value="{{ old('total') }}" class="form-control @error('total') is-invalid @enderror">
+            <input type="number" min="1" max="100" step="1" name="total" id="total" value="{{ old('total') }}" class="form-control @error('total') is-invalid @enderror" placeholder="{{ trans('Masukkan Jumlah') }}">
             @error('total')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -57,6 +57,12 @@
             @enderror
           </div>
 
+          <div class="mb-1">
+            <button type="reset" class="btn btn-danger w-100">
+              <i class="fa fa-fw fa-eraser me-1"></i>
+              {{ trans('Reset') }}
+            </button>
+          </div>
           <div class="mb-4">
             <button type="submit" class="btn btn-primary w-100" id="submit-button">
               <i class="fa fa-fw fa-circle-check me-1"></i>

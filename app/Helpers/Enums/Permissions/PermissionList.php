@@ -35,6 +35,15 @@ class PermissionList
       'materials.edit',
       'materials.update',
       'materials.destroy',
+
+      // Halaman product
+      'products.index',
+      'products.create',
+      'products.store',
+      'products.show',
+      'products.edit',
+      'products.update',
+      'products.destroy',
     ];
   }
 }

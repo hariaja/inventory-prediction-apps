@@ -82,7 +82,7 @@
             </a>
           </li>
 
-          @canany(['materials.index'])
+          @canany(['materials.index', 'products.index'])
           <li class="nav-main-heading">{{ trans('Master Data') }}</li>
 
           <li class="nav-main-item {{ Request::is('masters*') ? 'open' : '' }}">
@@ -95,6 +95,13 @@
               <li class="nav-main-item">
                 <a class="nav-main-link {{ Request::is('masters/materials*') ? 'active' : '' }}" href="{{ route('materials.index') }}">
                   <span class="nav-main-link-name">{{ trans('page.materials.title') }}</span>
+                </a>
+              </li>
+              @endcan
+              @can('products.index')
+              <li class="nav-main-item">
+                <a class="nav-main-link {{ Request::is('masters/products*') ? 'active' : '' }}" href="{{ route('products.index') }}">
+                  <span class="nav-main-link-name">{{ trans('page.products.title') }}</span>
                 </a>
               </li>
               @endcan

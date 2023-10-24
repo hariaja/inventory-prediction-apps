@@ -63,13 +63,35 @@ Breadcrumbs::for('materials.create', function (BreadcrumbTrail $trail) {
   $trail->push(trans('page.materials.create'), route('materials.create'));
 });
 
-Breadcrumbs::for('materials.edit', function (BreadcrumbTrail $trail, $user) {
+Breadcrumbs::for('materials.edit', function (BreadcrumbTrail $trail, $material) {
   $trail->parent('materials.index');
-  $trail->push(trans('page.materials.edit'), route('materials.edit', $user->uuid));
+  $trail->push(trans('page.materials.edit'), route('materials.edit', $material->uuid));
 });
 
-Breadcrumbs::for('materials.show', function (BreadcrumbTrail $trail, $user) {
+Breadcrumbs::for('materials.show', function (BreadcrumbTrail $trail, $material) {
   $trail->parent('materials.index');
-  $trail->push(trans('page.materials.show'), route('materials.show', $user->uuid));
+  $trail->push(trans('page.materials.show'), route('materials.show', $material->uuid));
+});
+// materials Breadcrumbs
+
+// products Breadcrumbs
+Breadcrumbs::for('products.index', function (BreadcrumbTrail $trail) {
+  $trail->parent('home');
+  $trail->push(trans('page.products.index'), route('products.index'));
+});
+
+Breadcrumbs::for('products.create', function (BreadcrumbTrail $trail) {
+  $trail->parent('products.index');
+  $trail->push(trans('page.products.create'), route('products.create'));
+});
+
+Breadcrumbs::for('products.edit', function (BreadcrumbTrail $trail, $product) {
+  $trail->parent('products.index');
+  $trail->push(trans('page.products.edit'), route('products.edit', $product->uuid));
+});
+
+Breadcrumbs::for('products.show', function (BreadcrumbTrail $trail, $product) {
+  $trail->parent('products.index');
+  $trail->push(trans('page.products.show'), route('products.show', $product->uuid));
 });
 // materials Breadcrumbs

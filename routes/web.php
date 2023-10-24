@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Masters\MaterialController;
+use App\Http\Controllers\Masters\ProductController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PasswordController;
@@ -48,5 +49,8 @@ Route::middleware([
   Route::prefix('masters')->group(function () {
     // Materials
     Route::resource('materials', MaterialController::class)->except('show');
+
+    // Products
+    Route::resource('products', ProductController::class);
   });
 });
