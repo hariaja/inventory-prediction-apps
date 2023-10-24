@@ -55,6 +55,7 @@ class ProductController extends Controller
   {
     $product->expired_date = Helper::parseDateTime($product->expired_at);
     $product->produced_date = Helper::parseDateTime($product->produced_at);
+    $product->unit_price = Helper::parseRupiahFormat($product->price);
 
     return response()->json([
       'product' => $product,

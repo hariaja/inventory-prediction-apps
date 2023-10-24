@@ -22,6 +22,7 @@ class Product extends Model
     'quantity',
     'produced_at',
     'expired_at',
+    'price',
     'description',
   ];
 

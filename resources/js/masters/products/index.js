@@ -48,6 +48,7 @@ $(document).on("click", ".show-products", function (e) {
                 "#product-name": product.name,
                 "#product-code": product.code,
                 "#product-quantity": product.quantity + " Pcs",
+                "#product-unit-price": product.unit_price,
                 "#product-produced-at": product.produced_date,
                 "#product-expired-at": product.expired_date,
                 "#product-description": product.description,

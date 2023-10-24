@@ -31,6 +31,7 @@ class ProductRequest extends FormRequest
       'quantity' => 'required|numeric|max:50',
       'produced_at' => 'required|date',
       'description' => 'nullable|string',
+      'price' => 'required',
     ];
   }
 
@@ -72,6 +73,7 @@ class ProductRequest extends FormRequest
       'quantity' => 'Jumlah Produk',
       'produced_at' => 'Diproduksi Pada',
       'description' => 'Deskripsi',
+      'price' => 'Harga Satuan',
     ];
   }
 }

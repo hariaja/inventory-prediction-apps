@@ -22,6 +22,10 @@
               <span class="fw-semibold" id="product-code"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ trans('Harga Satuan') }}
+              <span class="fw-semibold" id="product-unit-price"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
               {{ trans('Stok Tersedia') }}
               <span class="fw-semibold" id="product-quantity"></span>
             </li>

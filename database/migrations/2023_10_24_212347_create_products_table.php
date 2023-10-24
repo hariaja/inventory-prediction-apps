@@ -19,6 +19,7 @@ return new class extends Migration
       $table->integer('quantity');
       $table->date('produced_at');
       $table->date('expired_at');
+      $table->integer('price');
       $table->longText('description')->nullable();
       $table->timestamps();
     });

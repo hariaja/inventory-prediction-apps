@@ -37,6 +37,7 @@ class ProductDataTable extends DataTable
     return (new EloquentDataTable($query))
       ->addIndexColumn()
       ->editColumn('quantity', fn ($row) => "{$row->quantity} Pcs")
+      ->editColumn('price', fn ($row) => Helper::parseRupiahFormat($row->price))
       ->editColumn('expired_at', fn ($row) => Helper::parseDateTime($row->expired_at))
       ->editColumn('produced_at', fn ($row) => Helper::parseDateTime($row->produced_at))
       ->addColumn('action', 'products.action')
@@ -104,14 +105,11 @@ class ProductDataTable extends DataTable
       Column::make('name')
         ->title(trans('Nama Product'))
         ->addClass('text-center'),
+      Column::make('price')
+        ->title(trans('Harga Satuan'))
+        ->addClass('text-center'),
       Column::make('quantity')
         ->title(trans('Stok'))
-        ->addClass('text-center'),
-      Column::make('produced_at')
-        ->title(trans('Tanggal Produksi'))
-        ->addClass('text-center'),
-      Column::make('expired_at')
-        ->title(trans('Tanggal Kadaluarsa'))
         ->addClass('text-center'),
       Column::computed('action')
         ->exportable(false)

@@ -41,9 +41,13 @@ class ProductServiceImplement extends Service implements ProductService
     try {
       DB::beginTransaction();
 
+      $price = $request->price;
+      $unitPrice = str_replace(',', '', $price);
+
       $payload = $request->validated();
       $payload['code'] = Helper::generateCode('materials', 'code', "PD" . date('Ym'), 9, 3);
       $payload['expired_at'] = Carbon::parse($request->produced_at)->addWeeks(1)->format('Y-m-d');
+      $payload['price'] = $unitPrice;
 
       $this->mainRepository->create($payload);
 
@@ -60,8 +64,12 @@ class ProductServiceImplement extends Service implements ProductService
     try {
       DB::beginTransaction();
 
+      $price = $request->price;
+      $unitPrice = str_replace(',', '', $price);
+
       $payload = $request->validated();
       $payload['expired_at'] = Carbon::parse($request->produced_at)->addWeeks(1)->format('Y-m-d');
+      $payload['price'] = $unitPrice;
       $this->mainRepository->update($id, $payload);
 
       DB::commit();

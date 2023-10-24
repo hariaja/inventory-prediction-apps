@@ -2,12 +2,18 @@
 @section('title', trans('page.products.title'))
 @section('hero')
 <div class="content content-full">
-  <h2 class="content-heading">
-    {{ trans('page.products.title') }}
+  <div class="content-heading">
+    <div class="d-flex justify-content-between align-items-sm-center">
+      {{ trans('page.products.title') }}
+      <a href="{{ route('products.index') }}" class="btn btn-sm btn-block-option text-danger">
+        <i class="fa fa-xs fa-chevron-left me-1"></i>
+        {{ trans('button.back') }}
+      </a>
+    </div>
     <nav class="breadcrumb push my-0">
       {{ Breadcrumbs::render('products.edit', $product) }}
     </nav>
-  </h2>
+  </div>
 </div>
 @endsection
 @section('content')
@@ -40,6 +46,15 @@
             <span class="text-danger">*</span>
             <input type="number" min="1" max="50" step="1" name="quantity" id="quantity" value="{{ old('quantity', $product->quantity) }}" class="form-control @error('quantity') is-invalid @enderror" placeholder="{{ trans('Masukkan Jumlah') }}">
             @error('quantity')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="price">{{ trans('Harga Satuan') }}</label>
+            <span class="text-danger">*</span>
+            <input type="text" name="price" id="price" value="{{ old('price', $product->price) }}" class="form-control @error('price') is-invalid @enderror" placeholder="{{ trans('Masukkan Harga Satuan') }}">
+            @error('price')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
           </div>

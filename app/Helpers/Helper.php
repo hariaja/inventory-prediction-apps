@@ -129,4 +129,15 @@ class Helper
     }
     return $pattern . sprintf("%0" . $digit . "s", $next);
   }
+
+  /**
+   * Ubah format number ke format rupiah.
+   *
+   * @param  mixed $value
+   * @return string
+   */
+  public static function parseRupiahFormat(int $value): string
+  {
+    return 'Rp. ' . number_format($value, 0, ',', ',');
+  }
 }
