@@ -51,3 +51,25 @@ Breadcrumbs::for('users.show', function (BreadcrumbTrail $trail, $user) {
   $trail->push(trans('page.users.show'), route('users.show', $user->uuid));
 });
 // Users Breadcrumbs
+
+// materials Breadcrumbs
+Breadcrumbs::for('materials.index', function (BreadcrumbTrail $trail) {
+  $trail->parent('home');
+  $trail->push(trans('page.materials.index'), route('materials.index'));
+});
+
+Breadcrumbs::for('materials.create', function (BreadcrumbTrail $trail) {
+  $trail->parent('materials.index');
+  $trail->push(trans('page.materials.create'), route('materials.create'));
+});
+
+Breadcrumbs::for('materials.edit', function (BreadcrumbTrail $trail, $user) {
+  $trail->parent('materials.index');
+  $trail->push(trans('page.materials.edit'), route('materials.edit', $user->uuid));
+});
+
+Breadcrumbs::for('materials.show', function (BreadcrumbTrail $trail, $user) {
+  $trail->parent('materials.index');
+  $trail->push(trans('page.materials.show'), route('materials.show', $user->uuid));
+});
+// materials Breadcrumbs

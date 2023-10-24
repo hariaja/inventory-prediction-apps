@@ -33,6 +33,7 @@
 
           <div class="mb-4">
             <label class="form-label" for="name">{{ trans('Nama Peran') }}</label>
+            <span class="text-danger">*</span>
             <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" onkeypress="return hanyaHuruf(event)">
             @error('name')
             <div class="invalid-feedback">{{ $message }}</div>

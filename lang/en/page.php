@@ -30,4 +30,13 @@ return [
     'show' => 'Detail Role & Permission',
     'delete' => 'Hapus Role & Permission',
   ],
+
+  'materials' => [
+    'title' => 'Bahan Baku',
+    'index' => 'Daftar Bahan Baku',
+    'create' => 'Tambah Bahan Baku',
+    'edit' => 'Ubah Bahan Baku',
+    'show' => 'Detail Bahan Baku',
+    'delete' => 'Hapus Bahan Baku',
+  ],
 ];

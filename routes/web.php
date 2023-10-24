@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Masters\MaterialController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PasswordController;
@@ -43,4 +44,9 @@ Route::middleware([
   // Management password users.
   Route::get('users/password/{user}', [PasswordController::class, 'showChangePasswordForm'])->name('users.password');
   Route::post('users/password', [PasswordController::class, 'store']);
+
+  Route::prefix('masters')->group(function () {
+    // Materials
+    Route::resource('materials', MaterialController::class)->except('show');
+  });
 });

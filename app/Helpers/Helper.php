@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +18,7 @@ class Helper
    * Check permission to action datatables;
    *
    * @param  mixed $permissions
-   * @return void
+   * @return bool
    */
   public static function checkPermissions(array $permissions = []): bool
   {
@@ -108,5 +109,24 @@ class Helper
     }
 
     return $text;
+  }
+
+  /**
+   * Generate code automatic.
+   *
+   * @return void
+   */
+  public static function generateCode($table = NULL, $field = NULL, $pattern = NULL,  $beginning = NULL, $digit = NULL)
+  {
+    $last = DB::table($table)
+      ->select(DB::raw('MAX(SUBSTRING(' . $field . ',' . $beginning . ' , ' . $digit . ')) as lastno'))
+      ->where($field, 'LIKE', $pattern . '%')
+      ->first();
+    if (!empty($last)) {
+      $next = (int)$last->lastno + 1;
+    } else {
+      $next = 1;
+    }
+    return $pattern . sprintf("%0" . $digit . "s", $next);
   }
 }

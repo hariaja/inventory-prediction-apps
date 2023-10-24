@@ -27,6 +27,14 @@ class PermissionList
       'roles.edit',
       'roles.update',
       'roles.destroy',
+
+      // Halaman material
+      'materials.index',
+      'materials.create',
+      'materials.store',
+      'materials.edit',
+      'materials.update',
+      'materials.destroy',
     ];
   }
 }

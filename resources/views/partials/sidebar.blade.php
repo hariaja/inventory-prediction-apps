@@ -82,7 +82,27 @@
             </a>
           </li>
 
-          @canany(['roles.index', 'users.index', 'students.index'])
+          @canany(['materials.index'])
+          <li class="nav-main-heading">{{ trans('Master Data') }}</li>
+
+          <li class="nav-main-item {{ Request::is('masters*') ? 'open' : '' }}">
+            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ Request::is('masters*') ? 'true' : 'false' }}" href="#">
+              <i class="nav-main-link-icon fa fa-folder-open"></i>
+              <span class="nav-main-link-name">{{ trans('Persediaan') }}</span>
+            </a>
+            <ul class="nav-main-submenu">
+              @can('materials.index')
+              <li class="nav-main-item">
+                <a class="nav-main-link {{ Request::is('masters/materials*') ? 'active' : '' }}" href="{{ route('materials.index') }}">
+                  <span class="nav-main-link-name">{{ trans('page.materials.title') }}</span>
+                </a>
+              </li>
+              @endcan
+            </ul>
+          </li>
+          @endcan
+
+          @canany(['roles.index', 'users.index'])
           <li class="nav-main-heading">{{ trans('Management') }}</li>
 
           <li class="nav-main-item {{ Request::is('settings*') ? 'open' : '' }}">

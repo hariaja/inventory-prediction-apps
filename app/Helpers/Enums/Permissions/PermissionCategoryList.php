@@ -10,4 +10,5 @@ enum PermissionCategoryList: string
 
   case USERS = 'users.name';
   case ROLES = 'roles.name';
+  case MATERIALS = 'materials.name';
 }
