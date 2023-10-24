@@ -3,26 +3,26 @@
 namespace App\DataTables\Masters;
 
 use App\Helpers\Helper;
-use App\Models\Product;
+use App\Models\Transaction;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\EloquentDataTable;
-use App\Services\Product\ProductService;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use App\Services\Transaction\TransactionService;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class ProductDataTable extends DataTable
+class TransactionDataTable extends DataTable
 {
   /**
-   * Create a new datatables instance.
+   * Create a new database instance.
    *
    * @return void
    */
   public function __construct(
-    protected ProductService $productService,
+    protected TransactionService $transactionService,
   ) {
     // 
   }
@@ -36,12 +36,11 @@ class ProductDataTable extends DataTable
   {
     return (new EloquentDataTable($query))
       ->addIndexColumn()
-      ->editColumn('quantity', fn ($row) => "{$row->quantity} Pcs")
-      ->editColumn('quantity_one_day', fn ($row) => "{$row->quantity_one_day} Pcs")
+      ->editColumn('name', fn ($row) => $row->product->name)
+      ->editColumn('quantity', fn ($row) => "{$row->quantity} Produk")
       ->editColumn('price', fn ($row) => Helper::parseRupiahFormat($row->price))
-      ->editColumn('expired_at', fn ($row) => Helper::parseDateTime($row->expired_at))
-      ->editColumn('produced_at', fn ($row) => Helper::parseDateTime($row->produced_at))
-      ->addColumn('action', 'products.action')
+      ->editColumn('created_at', fn ($row) => Helper::parseDateTime($row->created_at))
+      ->addColumn('action', 'transactions.action')
       ->rawColumns([
         'action',
       ]);
@@ -50,9 +49,9 @@ class ProductDataTable extends DataTable
   /**
    * Get the query source of dataTable.
    */
-  public function query(Product $model): QueryBuilder
+  public function query(Transaction $model): QueryBuilder
   {
-    return $this->productService->getQuery()->oldest('name');
+    return $this->transactionService->getQuery()->oldest('code');
   }
 
   /**
@@ -61,7 +60,7 @@ class ProductDataTable extends DataTable
   public function html(): HtmlBuilder
   {
     return $this->builder()
-      ->setTableId('product-table')
+      ->setTableId('transaction-table')
       ->columns($this->getColumns())
       ->minifiedAjax()
       //->dom('Bfrtip')
@@ -89,8 +88,7 @@ class ProductDataTable extends DataTable
   {
     // Check Visibility of Action Row
     $visibility = Helper::checkPermissions([
-      'products.edit',
-      'products.destroy',
+      'transactions.destroy',
     ]);
 
     return [
@@ -107,13 +105,13 @@ class ProductDataTable extends DataTable
         ->title(trans('Nama Product'))
         ->addClass('text-center'),
       Column::make('price')
-        ->title(trans('Harga Satuan'))
+        ->title(trans('Harga Total'))
         ->addClass('text-center'),
       Column::make('quantity')
-        ->title(trans('Stok Tersedia'))
+        ->title(trans('Terjual'))
         ->addClass('text-center'),
-      Column::make('quantity_one_day')
-        ->title(trans('Stok Per Hari'))
+      Column::make('created_at')
+        ->title(trans('Tanggal Terjual'))
         ->addClass('text-center'),
       Column::computed('action')
         ->exportable(false)
@@ -129,6 +127,6 @@ class ProductDataTable extends DataTable
    */
   protected function filename(): string
   {
-    return 'Product_' . date('YmdHis');
+    return 'Transaction_' . date('YmdHis');
   }
 }

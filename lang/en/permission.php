@@ -52,4 +52,17 @@ return [
     'delete' => 'Hapus Permanen Produk yang sudah Terhapus dari penyimpanan',
     'restore' => 'Restore Data Produk yang ditentukan dari penyimpanan yang sudah dihapus',
   ],
+
+  'transactions' => [
+    'name' => 'Management Transaksi',
+    'index' => 'Menampilkan daftar Transaksi',
+    'create' => 'Tampilkan formulir untuk membuat Transaksi baru',
+    'store' => 'Simpan Transaksi yang baru dibuat di penyimpanan',
+    'show' => 'Menampilkan Detail Transaksi yang ditentukan',
+    'edit' => 'Tampilkan formulir untuk mengedit Transaksi yang ditentukan',
+    'update' => 'Perbarui Transaksi yang ditentukan dalam penyimpanan',
+    'destroy' => 'Hapus Transaksi yang ditentukan dari penyimpanan',
+    'delete' => 'Hapus Permanen Transaksi yang sudah Terhapus dari penyimpanan',
+    'restore' => 'Restore Data Transaksi yang ditentukan dari penyimpanan yang sudah dihapus',
+  ],
 ];

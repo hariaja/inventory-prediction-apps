@@ -16,11 +16,10 @@ class ProductServiceImplement extends Service implements ProductService
    * don't change $this->mainRepository variable name
    * because used in extends service class
    */
-  protected $mainRepository;
-
-  public function __construct(ProductRepository $mainRepository)
-  {
-    $this->mainRepository = $mainRepository;
+  public function __construct(
+    protected ProductRepository $mainRepository
+  ) {
+    // 
   }
 
   public function getQuery()
@@ -28,6 +27,23 @@ class ProductServiceImplement extends Service implements ProductService
     try {
       DB::beginTransaction();
       return $this->mainRepository->getQuery();
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+  }
+
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=')
+  {
+    try {
+      DB::beginTransaction();
+      return $this->mainRepository->getWhere(
+        wheres: $wheres,
+        columns: $columns,
+        comparisons: $comparisons,
+      );
       DB::commit();
     } catch (\Exception $e) {
       DB::rollBack();
@@ -45,7 +61,7 @@ class ProductServiceImplement extends Service implements ProductService
       $unitPrice = str_replace(',', '', $price);
 
       $payload = $request->validated();
-      $payload['code'] = Helper::generateCode('materials', 'code', "PD" . date('Ym'), 9, 3);
+      $payload['code'] = Helper::generateCode('products', 'code', "PD" . date('Ym'), 9, 3);
       $payload['expired_at'] = Carbon::parse($request->produced_at)->addWeeks(1)->format('Y-m-d');
       $payload['price'] = $unitPrice;
 

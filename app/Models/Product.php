@@ -20,6 +20,7 @@ class Product extends Model
     'code',
     'name',
     'quantity',
+    'quantity_one_day',
     'produced_at',
     'expired_at',
     'price',

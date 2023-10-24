@@ -44,6 +44,13 @@ class PermissionList
       'products.edit',
       'products.update',
       'products.destroy',
+
+      // Halaman transaction
+      'transactions.index',
+      'transactions.create',
+      'transactions.store',
+      'transactions.show',
+      'transactions.destroy',
     ];
   }
 }

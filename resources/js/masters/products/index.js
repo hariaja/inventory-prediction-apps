@@ -8,7 +8,7 @@ $(() => {
 
 function deleteProduct(url) {
     showConfirmationModal(
-        "Dengan menekan tombol hapus, Maka semua data <b>Bahan</b> akan hilang!",
+        "Dengan menekan tombol hapus, Maka semua data <b>Produk</b> akan hilang!",
         "Hapus Data",
         url,
         "DELETE",
@@ -48,6 +48,7 @@ $(document).on("click", ".show-products", function (e) {
                 "#product-name": product.name,
                 "#product-code": product.code,
                 "#product-quantity": product.quantity + " Pcs",
+                "#product-quantity-one-day": product.quantity_one_day + " Pcs",
                 "#product-unit-price": product.unit_price,
                 "#product-produced-at": product.produced_date,
                 "#product-expired-at": product.expired_date,

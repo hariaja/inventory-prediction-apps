@@ -41,10 +41,19 @@
           </div>
 
           <div class="mb-4">
-            <label class="form-label" for="quantity">{{ trans('Jumlah') }}</label>
+            <label class="form-label" for="quantity">{{ trans('Stok Tersedia') }}</label>
             <span class="text-danger">*</span>
-            <input type="number" min="1" max="50" step="1" name="quantity" id="quantity" value="{{ old('quantity') }}" class="form-control @error('quantity') is-invalid @enderror" placeholder="{{ trans('Masukkan Jumlah') }}">
+            <input type="number" min="1" max="50" step="1" name="quantity" id="quantity" value="{{ old('quantity') }}" class="form-control @error('quantity') is-invalid @enderror" placeholder="{{ trans('Masukkan Stok Tersedia') }}">
             @error('quantity')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label" for="quantity_one_day">{{ trans('Jumlah Stok Per Hari') }}</label>
+            <span class="text-danger">*</span>
+            <input type="number" min="1" max="50" step="1" name="quantity_one_day" id="quantity_one_day" value="{{ old('quantity_one_day') }}" class="form-control @error('quantity_one_day') is-invalid @enderror" placeholder="{{ trans('Masukkan Jumlah Stok Per Hari') }}">
+            @error('quantity_one_day')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
           </div>

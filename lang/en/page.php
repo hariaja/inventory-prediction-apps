@@ -48,4 +48,13 @@ return [
     'show' => 'Detail Produk',
     'delete' => 'Hapus Produk',
   ],
+
+  'transactions' => [
+    'title' => 'Transaksi',
+    'index' => 'Daftar Transaksi',
+    'create' => 'Tambah Transaksi',
+    'edit' => 'Ubah Transaksi',
+    'show' => 'Detail Transaksi',
+    'delete' => 'Hapus Transaksi',
+  ],
 ];

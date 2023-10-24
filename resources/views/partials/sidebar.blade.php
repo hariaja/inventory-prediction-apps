@@ -82,6 +82,16 @@
             </a>
           </li>
 
+          @can('transactions.index')
+          <li class="nav-main-heading">{{ trans('Riwayat') }}</li>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ Request::is('transactions*') ? 'active' : '' }}" href="{{ route('transactions.index') }}">
+              <i class="nav-main-link-icon fa fa-money-bill"></i>
+              <span class="nav-main-link-name">{{ trans('page.transactions.title') }}</span>
+            </a>
+          </li>
+          @endcan
+
           @canany(['materials.index', 'products.index'])
           <li class="nav-main-heading">{{ trans('Master Data') }}</li>
 

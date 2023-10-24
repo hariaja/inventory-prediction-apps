@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Masters\MaterialController;
-use App\Http\Controllers\Masters\ProductController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
+use App\Http\Controllers\Masters\ProductController;
+use App\Http\Controllers\Masters\MaterialController;
 use App\Http\Controllers\Settings\PasswordController;
+use App\Http\Controllers\Masters\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,7 @@ Route::middleware([
     // Products
     Route::resource('products', ProductController::class);
   });
+
+  // Transaction
+  Route::resource('transactions', TransactionController::class)->except('edit', 'update');
 });

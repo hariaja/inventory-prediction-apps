@@ -26,4 +26,21 @@ class ProductRepositoryImplement extends Eloquent implements ProductRepository
   {
     return $this->model->query();
   }
+
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=')
+  {
+    $data = $this->model->select($columns);
+
+    if (!empty($wheres)) {
+      foreach ($wheres as $key => $value) {
+        if (is_array($value)) {
+          $data = $data->whereIn($key, $value);
+        } else {
+          $data = $data->where($key, $comparisons, $value);
+        }
+      }
+    }
+
+    return $data;
+  }
 }

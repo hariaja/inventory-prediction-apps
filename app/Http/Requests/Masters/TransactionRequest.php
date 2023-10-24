@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Masters;
 
-use Illuminate\Support\Str;
+use App\Models\Product;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class TransactionRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -24,38 +24,25 @@ class ProductRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => [
-        'required', 'string',
-        Rule::unique('products', 'name')->ignore($this->product),
-      ],
-      'quantity' => 'required|numeric|max:50',
-      'quantity_one_day' => 'required|numeric|max:50',
-      'produced_at' => 'required|date',
-      'description' => 'nullable|string',
-      'price' => 'required',
+      'product_id' => 'required|exists:products,id',
+      'quantity' => 'required|numeric|max:25',
     ];
   }
 
   public function withValidator($validator)
   {
     $validator->after(function ($validator) {
+      $productId = $this->input('product_id');
       $quantity = $this->input('quantity');
-      $quantityOneDay = $this->input('quantity_one_day');
 
-      if ($quantity > $quantityOneDay) {
-        $validator->errors()->add('quantity', 'Stok yang tersedia tidak boleh lebih besar dari Jumlah Stok Per Hari.');
+      if ($productId && $quantity) {
+        $product = Product::find($productId);
+
+        if (!$product || $quantity > $product->quantity) {
+          $validator->errors()->add('quantity', 'Jumlah tidak boleh melebihi stok yang tersedia.');
+        }
       }
     });
-  }
-
-  /**
-   * Make a capital letter at the end of each word.
-   */
-  public function validationData()
-  {
-    $data = $this->all();
-    $data['name'] = Str::title($data['name']);
-    return $data;
   }
 
   /**
@@ -82,12 +69,8 @@ class ProductRequest extends FormRequest
   public function attributes(): array
   {
     return [
-      'name' => 'Nama Produk',
-      'quantity' => 'Jumlah Produk',
-      'quantity_one_day' => 'Jumlah Produk Per Hari',
-      'produced_at' => 'Diproduksi Pada',
-      'description' => 'Deskripsi',
-      'price' => 'Harga Satuan',
+      'product_id' => 'Nama Produk',
+      'quantity' => 'Jumlah Terjual',
     ];
   }
 }

@@ -94,4 +94,26 @@ Breadcrumbs::for('products.show', function (BreadcrumbTrail $trail, $product) {
   $trail->parent('products.index');
   $trail->push(trans('page.products.show'), route('products.show', $product->uuid));
 });
-// materials Breadcrumbs
+// products Breadcrumbs
+
+// transactions Breadcrumbs
+Breadcrumbs::for('transactions.index', function (BreadcrumbTrail $trail) {
+  $trail->parent('home');
+  $trail->push(trans('page.transactions.index'), route('transactions.index'));
+});
+
+Breadcrumbs::for('transactions.create', function (BreadcrumbTrail $trail) {
+  $trail->parent('transactions.index');
+  $trail->push(trans('page.transactions.create'), route('transactions.create'));
+});
+
+Breadcrumbs::for('transactions.edit', function (BreadcrumbTrail $trail, $transaction) {
+  $trail->parent('transactions.index');
+  $trail->push(trans('page.transactions.edit'), route('transactions.edit', $transaction->uuid));
+});
+
+Breadcrumbs::for('transactions.show', function (BreadcrumbTrail $trail, $transaction) {
+  $trail->parent('transactions.index');
+  $trail->push(trans('page.transactions.show'), route('transactions.show', $transaction->uuid));
+});
+// transactions Breadcrumbs

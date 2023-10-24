@@ -30,6 +30,10 @@
               <span class="fw-semibold" id="product-quantity"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ trans('Stok Per Hari') }}
+              <span class="fw-semibold" id="product-quantity-one-day"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
               {{ trans('Tanggal Produksi') }}
               <span class="fw-semibold" id="product-produced-at"></span>
             </li>
