@@ -6,7 +6,7 @@ $(() => {
     table = $(".table").DataTable();
 });
 
-function deleteProduct(url) {
+function deleteTransaction(url) {
     showConfirmationModal(
         "Dengan menekan tombol hapus, Maka semua data <b>Transaksi</b> akan hilang!",
         "Hapus Data",
@@ -24,7 +24,7 @@ $(document).on("click", ".delete-transactions", function (e) {
     e.preventDefault();
     let url = urlDestroy;
     url = url.replace(":uuid", $(this).data("uuid"));
-    deleteProduct(url);
+    deleteTransaction(url);
 });
 
 // Show Detail product

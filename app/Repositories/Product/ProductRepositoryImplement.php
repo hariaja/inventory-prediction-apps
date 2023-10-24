@@ -27,7 +27,7 @@ class ProductRepositoryImplement extends Eloquent implements ProductRepository
     return $this->model->query();
   }
 
-  public function getWhere($wheres = [], $columns = '*', $comparisons = '=')
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=', $orderBy = null, $orderByType = null)
   {
     $data = $this->model->select($columns);
 
@@ -39,6 +39,10 @@ class ProductRepositoryImplement extends Eloquent implements ProductRepository
           $data = $data->where($key, $comparisons, $value);
         }
       }
+    }
+
+    if ($orderBy) {
+      $data = $data->orderBy($orderBy, $orderByType);
     }
 
     return $data;

@@ -51,6 +51,13 @@ class PermissionList
       'transactions.store',
       'transactions.show',
       'transactions.destroy',
+
+      // Halaman count
+      'counts.index',
+      'counts.create',
+      'counts.store',
+      'counts.show',
+      'counts.destroy',
     ];
   }
 }

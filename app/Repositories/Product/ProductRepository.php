@@ -7,5 +7,5 @@ use LaravelEasyRepository\Repository;
 interface ProductRepository extends Repository
 {
   public function getQuery();
-  public function getWhere($wheres = [], $columns = '*', $comparisons = '=');
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=', $orderBy = null, $orderByType = null);
 }

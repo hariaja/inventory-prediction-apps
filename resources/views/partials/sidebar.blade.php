@@ -82,12 +82,24 @@
             </a>
           </li>
 
-          @can('transactions.index')
+          @canany(['transactions.index', 'counts.index'])
           <li class="nav-main-heading">{{ trans('Riwayat') }}</li>
+          @endcan
+
+          @can('transactions.index')
           <li class="nav-main-item">
             <a class="nav-main-link {{ Request::is('transactions*') ? 'active' : '' }}" href="{{ route('transactions.index') }}">
               <i class="nav-main-link-icon fa fa-money-bill"></i>
               <span class="nav-main-link-name">{{ trans('page.transactions.title') }}</span>
+            </a>
+          </li>
+          @endcan
+
+          @can('counts.index')
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ Request::is('counts*') ? 'active' : '' }}" href="{{ route('counts.index') }}">
+              <i class="nav-main-link-icon fa fa-calculator"></i>
+              <span class="nav-main-link-name">{{ trans('page.counts.title') }}</span>
             </a>
           </li>
           @endcan

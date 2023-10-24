@@ -35,7 +35,7 @@ class ProductServiceImplement extends Service implements ProductService
     }
   }
 
-  public function getWhere($wheres = [], $columns = '*', $comparisons = '=')
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=', $orderBy = null, $orderByType = null)
   {
     try {
       DB::beginTransaction();
@@ -43,6 +43,8 @@ class ProductServiceImplement extends Service implements ProductService
         wheres: $wheres,
         columns: $columns,
         comparisons: $comparisons,
+        orderBy: $orderBy,
+        orderByType: $orderByType
       );
       DB::commit();
     } catch (\Exception $e) {

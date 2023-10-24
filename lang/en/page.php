@@ -57,4 +57,13 @@ return [
     'show' => 'Detail Transaksi',
     'delete' => 'Hapus Transaksi',
   ],
+
+  'counts' => [
+    'title' => 'Prediksi Fuzzy',
+    'index' => 'Daftar Prediksi Fuzzy',
+    'create' => 'Tambah Prediksi Fuzzy',
+    'edit' => 'Ubah Prediksi Fuzzy',
+    'show' => 'Detail Prediksi Fuzzy',
+    'delete' => 'Hapus Prediksi Fuzzy',
+  ],
 ];

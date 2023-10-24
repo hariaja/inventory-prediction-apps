@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Histories\CountController;
 use Illuminate\Support\Facades\Route;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\HomeController;
@@ -57,4 +58,7 @@ Route::middleware([
 
   // Transaction
   Route::resource('transactions', TransactionController::class)->except('edit', 'update');
+
+  // Count
+  Route::resource('counts', CountController::class)->except('edit', 'update');
 });

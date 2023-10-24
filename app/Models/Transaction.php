@@ -26,6 +26,11 @@ class Transaction extends Model
     'quantity',
   ];
 
+  protected $with = [
+    'user',
+    'product',
+  ];
+
   /**
    * Get the route key for the model.
    */

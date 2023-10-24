@@ -36,6 +36,25 @@ class TransactionServiceImplement extends Service implements TransactionService
     }
   }
 
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=', $orderBy = null, $orderByType = null)
+  {
+    try {
+      DB::beginTransaction();
+      return $this->mainRepository->getWhere(
+        wheres: $wheres,
+        columns: $columns,
+        comparisons: $comparisons,
+        orderBy: $orderBy,
+        orderByType: $orderByType
+      );
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+  }
+
   public function handleStoreData($request)
   {
     try {

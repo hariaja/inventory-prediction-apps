@@ -62,7 +62,9 @@ class TransactionController extends Controller
    */
   public function show(Transaction $transaction)
   {
-    //
+    return response()->json([
+      'transaction' => $transaction,
+    ]);
   }
 
   /**
