@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\Role\RoleService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\RoleRequest;
+use App\Models\PermissionCategory;
 use App\Services\PermissionCategory\PermissionCategoryService;
 
 class RoleController extends Controller
@@ -37,7 +38,14 @@ class RoleController extends Controller
    */
   public function create()
   {
-    $permissions = $this->permissionCategoryService->with(['permissions'])->get();
+    // $permissions = $this->permissionCategoryService->with(
+    //   with: [
+    //     'permissions',
+    //   ]
+    // )->get();
+
+    $permissions = PermissionCategory::with('permissions')->get();
+
     return view('settings.roles.create', compact('permissions'));
   }
 
@@ -63,7 +71,11 @@ class RoleController extends Controller
    */
   public function edit(Role $role)
   {
-    $permissions = $this->permissionCategoryService->with(['permissions'])->get();
+    $permissions = $this->permissionCategoryService->with(
+      with: [
+        'permissions',
+      ]
+    )->get();
     $roleHasPermission = $this->roleService->getRoleHasPermissions($role->id);
 
     return view('settings.roles.edit', compact('role', 'roleHasPermission', 'permissions'));

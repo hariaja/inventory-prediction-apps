@@ -25,7 +25,7 @@ class Permission extends ModelPermission
    * Relationship to permission category model
    *
    */
-  public function permission_category(): BelongsTo
+  public function permissionCategory(): BelongsTo
   {
     return $this->belongsTo(PermissionCategory::class, 'permission_category_id');
   }

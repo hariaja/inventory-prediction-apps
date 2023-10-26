@@ -37,7 +37,9 @@ class PermissionCategoryServiceImplement extends Service implements PermissionCa
   {
     try {
       DB::beginTransaction();
-      return $this->mainRepository->with($with);
+      return $this->mainRepository->with(
+        with: $with
+      );
       DB::commit();
     } catch (\Exception $e) {
       DB::rollBack();

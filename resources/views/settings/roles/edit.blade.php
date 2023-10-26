@@ -63,7 +63,7 @@
         <div class="col-md-6">
           <div class="card push">
             <div class="card-header border-bottom-0">
-              <h6 class="block-title">{{ trans('permission.' . $data->name) }}</h6>
+              <h6 class="block-title">{{ trans("permission.{$data->name}") }}</h6>
             </div>
             <div class="card-body">
               <div class="row">

@@ -34,7 +34,7 @@
           <div class="mb-4">
             <label class="form-label" for="name">{{ trans('Nama Peran') }}</label>
             <span class="text-danger">*</span>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" onkeypress="return hanyaHuruf(event)">
+            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" onkeypress="return hanyaHuruf(event)" placeholder="{{ trans('Masukkan Nama Peran') }}">
             @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -55,11 +55,6 @@
                 @enderror
               </div>
             </div>
-            <div class="">
-              <span class="text-muted">
-                {{ trans('Scroll untuk melihat lebih') }}
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -69,7 +64,7 @@
         <div class="col-md-6">
           <div class="card push">
             <div class="card-header border-bottom-0">
-              <h6 class="block-title">{{ trans('permission.' . $data->name) }}</h6>
+              <h6 class="block-title">{{ trans("permission.{$data->name}") }}</h6>
             </div>
             <div class="card-body">
               <div class="row">
