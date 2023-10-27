@@ -79,7 +79,7 @@ class CountServiceImplement extends Service implements CountService
       $z4 = 48 - $rule4 * (48 - 2); // Produksi Sedikit
 
       $rule5 = min($penjualanTetap, $persediaanSedang);
-      $z5 = 12;
+      $z5 = 12; // Produksi Sedang
 
       $rule6 = min($penjualanTetap, $persediaanSedikit);
       $z6 = $rule6 * (48 - 2) + 2; // Produksi Banyak
@@ -101,9 +101,75 @@ class CountServiceImplement extends Service implements CountService
 
       $result = ceil($defuzzyfikasi);
 
+      // Ingredient
+      // Garam 33,33 Gram
+      // Mentega 1,86 Gram
+      // Perwarna makanan warna merah : 5 ml
+      // Keju : 20 gram
+      // Msg : 33,3 gram
+      // Telur : 200 ml
+      // Tepung terigu : 1,24 kg
+      // Tepung aci : 0,84 kg / 840 gram
+
+      $salt = ceil(33.33 * $result);
+      $butter = ceil(1.86 * $result);
+      $foodColoring = ceil(5 * $result);
+      $cheese = ceil(20 * $result);
+      $msg = ceil(33.3 * $result);
+      $egg = ceil(200 * $result);
+      $flour = ceil(1.24 * $result);
+      $aciFlour = ceil(0.84 * $result);
+
+      $payload['stock'] = $stock;
+      $payload['sale'] = $sale;
       $payload['score'] = $defuzzyfikasi;
       $payload['description'] = "Berdasarkan perhitungan dengan metode
-      fuzzy Tsukamoto, maka pada tanggal {$dateCreatedTransaction} jumlah Produksi yang harus dilakukan ketika nilai penjualan sebanyak {$sale} dan nilai persediaan sebanyak {$stock} adalah sebanyak {$result} barang.";
+      fuzzy Tsukamoto, maka pada hari {$dateCreatedTransaction} jumlah Produksi yang harus dilakukan ketika nilai penjualan sebanyak {$sale} dan nilai persediaan sebanyak {$stock} adalah sebanyak {$result} barang.";
+      $payload['ingredient_description'] =
+        "<span class='fw-normal'>Berdasarkan jumlah produksi yang sudah diprediksi ({$result} Produk). Maka bahan yang akan dihabiskan adalah sebagai berikut:</span>
+        <div class='row my-3'>
+          <div class='col-md-6'>
+            <ul class='list-group push'>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Garam
+                <span class='fw-semibold'>{$salt} Gram</span>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Mentega
+                <span class='fw-semibold'>{$butter} Gram</span>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Pewarna Makanan (Merah)
+                <span class='fw-semibold'>{$foodColoring} Mililiter</span>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Keju
+                <span class='fw-semibold'>{$cheese} Gram</span>
+              </li>
+            </ul>
+          </div>
+          <div class='col-md-6'>
+            <ul class='list-group push'>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                MSG
+                <span class='fw-semibold'>{$msg} Gram</span>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Telur
+                <span class='fw-semibold'>{$egg} Mililiter</span>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Tepung Terigu
+                <span class='fw-semibold'>{$flour} Kilogram</span>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'>
+                Tepung Aci
+                <span class='fw-semibold'>{$aciFlour} Kilogram</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      ";
 
       $this->mainRepository->create($payload);
 

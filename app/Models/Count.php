@@ -19,9 +19,12 @@ class Count extends Model
   protected $fillable = [
     'uuid',
     'transaction_id',
+    'stock',
+    'sale',
     'score',
     'qualification',
     'description',
+    'ingredient_description',
   ];
 
   /**

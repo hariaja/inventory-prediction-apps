@@ -55,7 +55,7 @@
         </ul>
       </div>
       <div class="col-md-6">
-        <ul class="list-group push">
+        <ul class="list-group push mb-1">
           <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ trans('Skor Penentuan Fuzzy') }}
             <span class="fw-semibold">{{ $count->score }}</span>
@@ -65,6 +65,12 @@
             <p class="fw-semibold mb-0" style="text-align: justify">{{ $count->description }}</p>
           </li>
         </ul>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md">
+        {!! $count->ingredient_description !!}
       </div>
     </div>
 

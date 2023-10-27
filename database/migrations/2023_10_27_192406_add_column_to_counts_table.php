@@ -11,14 +11,9 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('materials', function (Blueprint $table) {
-      $table->id();
-      $table->string('uuid');
-      $table->string('code')->unique();
-      $table->string('name')->unique();
-      $table->float('total');
-      $table->string('mass');
-      $table->timestamps();
+    Schema::table('counts', function (Blueprint $table) {
+      $table->integer('stock')->after('transaction_id');
+      $table->integer('sale')->after('stock');
     });
   }
 
@@ -27,6 +22,9 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('materials');
+    Schema::table('counts', function (Blueprint $table) {
+      $table->dropColumn('stock');
+      $table->dropColumn('sale');
+    });
   }
 };

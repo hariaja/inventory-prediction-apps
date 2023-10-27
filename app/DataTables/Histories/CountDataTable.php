@@ -37,8 +37,8 @@ class CountDataTable extends DataTable
     return (new EloquentDataTable($query))
       ->addIndexColumn()
       ->addColumn('product_name', fn ($row) => $row->transaction->product->name)
-      ->addColumn('product_stock', fn ($row) => "{$row->transaction->product->quantity_one_day} Per Hari")
-      ->addColumn('transaction', fn ($row) => "{$row->transaction->quantity} Per Hari")
+      ->addColumn('stock', fn ($row) => "{$row->stock} Per Hari")
+      ->addColumn('sale', fn ($row) => "{$row->sale} Per Hari")
       ->addColumn('prediction', fn ($row) => ceil($row->score) . " Produk")
       ->addColumn('action', 'counts.action')
       ->rawColumns([
@@ -102,10 +102,10 @@ class CountDataTable extends DataTable
       Column::make('product_name')
         ->title(trans('Nama Produk'))
         ->addClass('text-center'),
-      Column::make('product_stock')
+      Column::make('stock')
         ->title(trans('Stok'))
         ->addClass('text-center'),
-      Column::make('transaction')
+      Column::make('sale')
         ->title(trans('Transaksi'))
         ->addClass('text-center'),
       Column::make('score')
