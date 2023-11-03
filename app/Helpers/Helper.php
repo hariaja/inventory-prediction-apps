@@ -111,12 +111,26 @@ class Helper
     return $text;
   }
 
+  public static function generateUniqueCode($table, $field, $pattern, $beginning, $digit)
+  {
+    do {
+      $code = self::generateCode($table, $field, $pattern, $beginning, $digit);
+    } while (self::isCodeExists($table, $field, $code));
+
+    return $code;
+  }
+
+  public static function isCodeExists($table, $field, $code)
+  {
+    return DB::table($table)->where($field, $code)->exists();
+  }
+
   /**
    * Generate code automatic.
    *
    * @return void
    */
-  public static function generateCode($table = NULL, $field = NULL, $pattern = NULL,  $beginning = NULL, $digit = NULL)
+  public static function generateCode($table, $field, $pattern, $beginning, $digit)
   {
     $last = DB::table($table)
       ->select(DB::raw('MAX(SUBSTRING(' . $field . ',' . $beginning . ' , ' . $digit . ')) as lastno'))
@@ -127,7 +141,7 @@ class Helper
     } else {
       $next = 1;
     }
-    return $pattern . sprintf("%0" . $digit . "s", $next);
+    return $pattern . sprintf("%0" . $digit . "d", $next);
   }
 
   /**

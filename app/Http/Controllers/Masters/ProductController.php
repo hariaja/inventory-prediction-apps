@@ -53,13 +53,7 @@ class ProductController extends Controller
    */
   public function show(Product $product)
   {
-    $product->expired_date = Helper::parseDateTime($product->expired_at);
-    $product->produced_date = Helper::parseDateTime($product->produced_at);
-    $product->unit_price = Helper::parseRupiahFormat($product->price);
-
-    return response()->json([
-      'product' => $product,
-    ]);
+    return view('products.show', compact('product'));
   }
 
   /**

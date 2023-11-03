@@ -1,3 +1,12 @@
+$(() => {
+    var dateInput = $("#produced_at");
+
+    dateInput.flatpickr({
+        maxDate: "today",
+        dateFormat: "Y-m-d",
+    });
+});
+
 document.getElementById("quantity").addEventListener("input", function () {
     var max = parseFloat(this.getAttribute("max"));
     if (this.value > max) {

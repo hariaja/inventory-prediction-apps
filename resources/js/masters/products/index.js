@@ -28,38 +28,38 @@ $(document).on("click", ".delete-products", function (e) {
 });
 
 // Show Detail product
-$(document).on("click", ".show-products", function (e) {
-    e.preventDefault();
-    var url = urlShowDetail.replace(":uuid", $(this).data("uuid"));
-    function showProduct(url) {
-        const modal = $("#modal-show-product");
-        const modalContent = modal.find(".modal-content");
+// $(document).on("click", ".show-products", function (e) {
+//     e.preventDefault();
+//     var url = urlShowDetail.replace(":uuid", $(this).data("uuid"));
+//     function showProduct(url) {
+//         const modal = $("#modal-show-product");
+//         const modalContent = modal.find(".modal-content");
 
-        modal.modal("show");
-        modal.find(".block-title").text("Detail Data Product");
+//         modal.modal("show");
+//         modal.find(".block-title").text("Detail Data Product");
 
-        $.get(url).done((response) => {
-            const product = response.product;
-            // const kelas = product.room;
+//         $.get(url).done((response) => {
+//             const product = response.product;
+//             // const kelas = product.room;
 
-            console.log(product);
+//             console.log(product);
 
-            const elements = {
-                "#product-name": product.name,
-                "#product-code": product.code,
-                "#product-quantity": product.quantity + " Pcs",
-                "#product-quantity-one-day": product.quantity_one_day + " Pcs",
-                "#product-unit-price": product.unit_price,
-                "#product-produced-at": product.produced_date,
-                "#product-expired-at": product.expired_date,
-                "#product-description": product.description,
-            };
+//             const elements = {
+//                 "#product-name": product.name,
+//                 "#product-code": product.code,
+//                 "#product-quantity": product.quantity + " Pcs",
+//                 "#product-quantity-one-day": product.quantity_one_day + " Pcs",
+//                 "#product-unit-price": product.unit_price,
+//                 "#product-produced-at": product.produced_date,
+//                 "#product-expired-at": product.expired_date,
+//                 "#product-description": product.description,
+//             };
 
-            Object.entries(elements).forEach(([selector, value]) => {
-                modalContent.find(selector).text(value);
-            });
-        });
-    }
+//             Object.entries(elements).forEach(([selector, value]) => {
+//                 modalContent.find(selector).text(value);
+//             });
+//         });
+//     }
 
-    return showProduct(url);
-});
+//     return showProduct(url);
+// });

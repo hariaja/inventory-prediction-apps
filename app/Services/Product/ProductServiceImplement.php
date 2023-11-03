@@ -3,6 +3,7 @@
 namespace App\Services\Product;
 
 use App\Helpers\Helper;
+use App\Repositories\Material\MaterialRepository;
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
 use LaravelEasyRepository\Service;
@@ -17,7 +18,8 @@ class ProductServiceImplement extends Service implements ProductService
    * because used in extends service class
    */
   public function __construct(
-    protected ProductRepository $mainRepository
+    protected ProductRepository $mainRepository,
+    protected MaterialRepository $materialRepository,
   ) {
     // 
   }
@@ -67,7 +69,41 @@ class ProductServiceImplement extends Service implements ProductService
       $payload['expired_at'] = Carbon::parse($request->produced_at)->addWeeks(1)->format('Y-m-d');
       $payload['price'] = $unitPrice;
 
-      $this->mainRepository->create($payload);
+      // Simpan Produk
+      $product = $this->mainRepository->create($payload);
+
+      // Tentukan jumlah bahan yang digunakan untuk produk
+      $ingredientQuantities = [
+        'Garam' => 33.33, // Gram
+        'Mentega' => 1.86, // Gram
+        'Pewarna Makanan Warna Merah' => 5, // Mililiter
+        'Keju' => 20, // Gram
+        'Msg' => 33.3, // Gram
+        'Telur' => 200, // Mililiter
+        'Tepung terigu' => 1.24,  // 1.24 kg dalam kilogram
+        'Tepung aci' => 0.84,  // 0.84 kg dalam kilogram
+      ];
+
+      // Loop melalui bahan-bahan dan simpan ke tabel pivot
+      foreach ($ingredientQuantities as $ingredientName => $quantityUsed) {
+        $material = $this->materialRepository->getWhere(
+          wheres: [
+            'name' => $ingredientName,
+          ]
+        )->first();
+
+        if ($material) {
+          $quantityUsedForProduct = $quantityUsed * $request->quantity;
+
+          if ($quantityUsedForProduct > $material->total) {
+            return redirect()->back()->with('error', 'Stok bahan tidak cukup untuk membuat produk ini. Silahkan kurangi stok tersedia untuk menambahkan produk atau tambahkan jumlah bahan baku terlebih dahulu');
+          }
+
+          $product->materials()->attach($material->id, ['quantity_used' => $quantityUsedForProduct]);
+          $material->total -= $quantityUsedForProduct;
+          $material->save();
+        }
+      }
 
       DB::commit();
     } catch (\Exception $e) {
@@ -82,13 +118,64 @@ class ProductServiceImplement extends Service implements ProductService
     try {
       DB::beginTransaction();
 
+      // Ambil data produk
+      $product = $this->mainRepository->findOrFail($id);
+
+      // Ambil `quantity` lama
+      $oldQuantity = $product->quantity;
+
       $price = $request->price;
       $unitPrice = str_replace(',', '', $price);
 
       $payload = $request->validated();
       $payload['expired_at'] = Carbon::parse($request->produced_at)->addWeeks(1)->format('Y-m-d');
       $payload['price'] = $unitPrice;
+
       $this->mainRepository->update($id, $payload);
+
+      // Tentukan jumlah bahan yang digunakan untuk produk
+      $ingredientQuantities = [
+        'Garam' => 33.33, // Gram
+        'Mentega' => 1.86, // Gram
+        'Pewarna Makanan Warna Merah' => 5, // Mililiter
+        'Keju' => 20, // Gram
+        'Msg' => 33.3, // Gram
+        'Telur' => 200, // Mililiter
+        'Tepung terigu' => 1.24,  // 1.24 kg dalam kilogram
+        'Tepung aci' => 0.84,  // 0.84 kg dalam kilogram
+      ];
+
+      foreach ($ingredientQuantities as $ingredientName => $quantityUsed) {
+        $material = $this->materialRepository->getWhere(
+          wheres: [
+            'name' => $ingredientName,
+          ]
+        )->first();
+
+        if ($material) {
+          $quantityUsedForProduct = $quantityUsed * $request->quantity;
+          $oldQuantityUsedForProduct = $quantityUsed * $oldQuantity;
+
+          // Hitung perbedaan stok
+          $stockDifference = $oldQuantityUsedForProduct - $quantityUsedForProduct;
+
+          if ($stockDifference > 0) {
+            // Kembalikan bahan ke stok jika perbedaan positif
+            $material->total += $stockDifference;
+          } elseif ($stockDifference < 0) {
+            // Kurangi stok bahan jika perbedaan negatif
+            $material->total -= abs($stockDifference);
+          }
+
+          $material->save();
+
+          // Hapus data lama di tabel pivot
+          $product->materials()->detach($material->id);
+
+          // Tambahkan data baru ke tabel pivot sesuai dengan `quantity` yang baru
+          $product->materials()->attach($material->id, ['quantity_used' => $quantityUsedForProduct]);
+        }
+      }
 
       DB::commit();
     } catch (\Exception $e) {

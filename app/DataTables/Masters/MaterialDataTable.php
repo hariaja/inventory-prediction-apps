@@ -48,7 +48,7 @@ class MaterialDataTable extends DataTable
    */
   public function query(Material $model): QueryBuilder
   {
-    return $this->materialService->getQuery()->oldest('name');
+    return $this->materialService->getQuery()->oldest('code');
   }
 
   /**

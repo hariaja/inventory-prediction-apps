@@ -36,15 +36,12 @@
 
   </div>
 </div>
-
-@includeIf('products.show')
 @endsection
 @push('javascript')
 {{ $dataTable->scripts() }}
 @vite('resources/js/masters/products/index.js')
 <script>
   var urlDestroy = "{{ route('products.destroy', ':uuid') }}"
-  var urlShowDetail = "{{ route('products.show', ':uuid') }}"
 
 </script>
 @endpush

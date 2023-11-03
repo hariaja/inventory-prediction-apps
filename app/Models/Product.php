@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -43,5 +44,15 @@ class Product extends Model
   public function getRouteKeyName(): string
   {
     return 'uuid';
+  }
+
+  /**
+   * Relation to Material tables.
+   *
+   * @return BelongsToMany
+   */
+  public function materials(): BelongsToMany
+  {
+    return $this->belongsToMany(Material::class)->withPivot('quantity_used')->withTimestamps();
   }
 }

@@ -12,7 +12,6 @@ use App\Repositories\Material\MaterialRepository;
 
 class MaterialServiceImplement extends Service implements MaterialService
 {
-
   /**
    * don't change $this->mainRepository variable name
    * because used in extends service class
@@ -34,6 +33,25 @@ class MaterialServiceImplement extends Service implements MaterialService
       DB::rollBack();
       Log::info($e->getMessage());
       throw new InvalidArgumentException(trans('session.log.error'));
+    }
+  }
+
+  public function getWhere($wheres = [], $columns = '*', $comparisons = '=', $orderBy = null, $orderByType = null)
+  {
+    try {
+      DB::beginTransaction();
+      return $this->mainRepository->getWhere(
+        wheres: $wheres,
+        columns: $columns,
+        comparisons: $comparisons,
+        orderBy: $orderBy,
+        orderByType: $orderByType
+      );
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('alert.log.error'));
     }
   }
 

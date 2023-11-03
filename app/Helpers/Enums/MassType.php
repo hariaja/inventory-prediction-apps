@@ -9,7 +9,7 @@ enum MassType: string
   use EnumsToArray;
 
   case GRAM = 'Gram';
-  case TON = 'Ton';
+  case MILILITER = 'Mililiter';
   case KILO = 'Kilogram';
   case LITER = 'Liter';
 }

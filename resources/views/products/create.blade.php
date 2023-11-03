@@ -70,7 +70,7 @@
           <div class="mb-4">
             <label for="produced_at" class="form-label">{{ trans('Tanggal Produksi') }}</label>
             <span class="text-danger">*</span>
-            <input type="text" class="js-flatpickr form-control @error('produced_at') is-invalid @enderror" id="produced_at" name="produced_at" min="{{ date('Y-m-d') }}" placeholder="{{ trans('Pilih Tanggal Produksi') }}" value="{{ old('produced_at') }}">
+            <input type="text" class="js-flatpickr form-control @error('produced_at') is-invalid @enderror" id="produced_at" name="produced_at" placeholder="{{ trans('Pilih Tanggal Produksi') }}" value="{{ old('produced_at') }}">
             @error('produced_at')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
